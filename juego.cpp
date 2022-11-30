@@ -57,6 +57,14 @@ int main()
         {
             HeroPosX = HeroPosX + 1; HeroPosX = HeroPosX - 1;
         }
+        else if(Input == 'w')
+        {
+            HeroPosY = HeroPosY + 1; HeroPosY = HeroPosY - 1;
+        }
+        else if(Input == 's')
+        {
+            HeroPosY = HeroPosY - 1; HeroPosY = HeroPosY - 1;
+        }
         DrawMap(HeroPosX, HeroPosY, GameMap);
     }
     return 0;
