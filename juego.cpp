@@ -3,6 +3,41 @@
 
 using namespace std;
 
+void SaveMap(int HeroPosY, int HeroPosX, char GameMap[10][10])
+{
+    ofstream MyFile("MapSave.txt");
+    if(MyFile.is_open())
+    {
+        for(int i = 0; i < 10; i = i + 1)
+        {
+            for(int p = 0; p < 10; p = p + 1)
+            {
+                if(i != HeroPosX)
+                {
+                    MyFile << GameMap[p][i];
+                }
+                else
+                {
+                    if(p != HeroPosY)
+                    {
+                        MyFile << GameMap[p][i];
+                    }
+                    else
+                    {
+                        MyFile << '3';
+                        HeroPosX = p;
+                        HeroPosY = i;
+                    }
+                }
+                HeroPosY = i;
+                HeroPosX = p;
+            }
+            MyFile << endl;
+        }
+    }
+    MyFile.close();
+}
+
 void DrawMap(int HeroPosY, int HeroPosX, char GameMap[10][10])
 {
     ofstream MyFile("MapSave.txt");
@@ -41,13 +76,14 @@ void DrawMap(int HeroPosY, int HeroPosX, char GameMap[10][10])
 
 int main()
 {
+    
     int HeroPosX = 0;
     int HeroPosY = 0;
     bool IsGameOver = false;
     char Input = ' '; 
     char GameMap[10][10] = 
     {
-        {'3','o','o','o','o','o','o','o','o','o'},
+        {'o','o','o','o','o','o','o','o','o','o'},
         {'o','o','o','o','o','o','o','o','o','o'},
         {'o','o','o','o','o','o','o','o','o','o'},
         {'o','o','o','o','o','o','o','o','o','o'},
@@ -58,7 +94,7 @@ int main()
         {'o','o','o','o','o','o','o','o','o','o'},
         {'o','o','o','o','o','o','o','o','o','o'}
     };
-
+    SaveMap(HeroPosY, HeroPosX, GameMap);
     DrawMap(HeroPosY, HeroPosX, GameMap);
 
     while (IsGameOver == false)
@@ -82,7 +118,8 @@ int main()
             HeroPosY = HeroPosY + 1;
         }
         else if(Input == 'p')
-        {
+        {   
+            SaveMap(HeroPosY, HeroPosX, GameMap);
             IsGameOver = true;
         }
         DrawMap(HeroPosX, HeroPosY, GameMap);
