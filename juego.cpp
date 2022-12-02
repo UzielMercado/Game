@@ -1,7 +1,8 @@
 #include <iostream>
 #include <fstream>
+#include <string>
 
-using namespace std;
+using namespace std; 
 
 void SaveMap(int HeroPosY, int HeroPosX, char GameMap[10][10])
 {
@@ -76,6 +77,16 @@ void DrawMap(int HeroPosY, int HeroPosX, char GameMap[10][10])
 
 int main()
 {
+
+    string MapFile;
+    ifstream MyFile("MapSave.txt");
+
+    while (!MyFile.eof())
+    {
+        getline(MyFile, MapFile);
+        cout << MapFile << endl;
+
+    }
     
     int HeroPosX = 0;
     int HeroPosY = 0;
@@ -99,7 +110,9 @@ int main()
 
     while (IsGameOver == false)
     {
+        cout << endl;
         cin >> Input;
+        cout << endl;
 
         if(Input == 'd')
         {
