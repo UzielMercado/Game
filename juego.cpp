@@ -1,4 +1,5 @@
 #include <iostream>
+#include <bits/stdc++.h> 
 #include <fstream>
 #include <string>
 
@@ -15,25 +16,21 @@ void SaveMap(int HeroPosY, int HeroPosX, char GameMap[10][10])
             {
                 if(i != HeroPosX)
                 {
-                    MyFile << GameMap[p][i];
+                    
                 }
                 else
                 {
                     if(p != HeroPosY)
                     {
-                        MyFile << GameMap[p][i];
+                        
                     }
                     else
                     {
-                        MyFile << '3';
-                        HeroPosX = p;
-                        HeroPosY = i;
+                        MyFile << p;
+                        MyFile << i;
                     }
                 }
-                HeroPosY = i;
-                HeroPosX = p;
             }
-            MyFile << endl;
         }
     }
     MyFile.close();
@@ -52,24 +49,22 @@ void DrawMap(int HeroPosY, int HeroPosX, char GameMap[10][10])
                 if(i != HeroPosX)
                 {
                     cout << GameMap[p][i];
-                    MyFile << GameMap[p][i];
                 }
                 else
                 {
                     if(p != HeroPosY)
                     {
                         cout << GameMap[p][i];
-                        MyFile << GameMap[p][i];
                     }
                     else
                     {
                         cout << 'H';
-                        MyFile << 'H';
+                        MyFile << p;
+                        MyFile << i;
                     }
                 }
             }
             cout << endl;
-            MyFile << endl;
         }
     }
     MyFile.close();
@@ -84,9 +79,19 @@ int main()
     while (!MyFile.eof())
     {
         getline(MyFile, MapFile);
-        cout << MapFile << endl;
+        //cout << MapFile << endl;
+
+        string test = MapFile;
+
+        char arr[test.length()+1]; 
+
+        strcpy(arr, test.c_str()); 
+        cout << endl;
+        for (int i = 0; i < test.length(); i++) 
+		    cout << arr[i]; 
 
     }
+    cout << endl;
     
     int HeroPosX = 0;
     int HeroPosY = 0;
@@ -106,10 +111,10 @@ int main()
         {'o','o','o','o','o','o','o','o','o','o'}
     };
     SaveMap(HeroPosY, HeroPosX, GameMap);
-    DrawMap(HeroPosY, HeroPosX, GameMap);
 
     while (IsGameOver == false)
     {
+        DrawMap(HeroPosX, HeroPosY, GameMap);
         cout << endl;
         cin >> Input;
         cout << endl;
@@ -135,7 +140,6 @@ int main()
             SaveMap(HeroPosY, HeroPosX, GameMap);
             IsGameOver = true;
         }
-        DrawMap(HeroPosX, HeroPosY, GameMap);
     }
     return 0;
 }
